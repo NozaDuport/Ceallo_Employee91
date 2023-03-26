@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
                     "me.jvt.cucumber.report.PrettyReports:target/cucumber"},
             features = "src/test/resources/features",
             glue = "com/ceallo/step_definitions",
-            tags = "@login"
+            tags = "@CEA10-292"
     )
     public class CukesRunner{
     }
