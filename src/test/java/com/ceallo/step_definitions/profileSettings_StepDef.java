@@ -21,7 +21,7 @@ public class profileSettings_StepDef {
     BasePage basePage = new BasePage();
     ProfileSettingsPage profileSettingsPage = new ProfileSettingsPage();
 
-    @When("User clicks on {string} link")
+    @And("User clicks on {string} link")
     public void userClicksOnLink(String avatar) {
         basePage.avatar.click();
     }
@@ -31,26 +31,6 @@ public class profileSettings_StepDef {
         basePage.settingsLink.click();
     }
 
-    @Then("User can see Full name title")
-    public void userCanSeeFullNameTitle() {
-        String nameTitle = profileSettingsPage.fullName.getText();
-        System.out.println(nameTitle);
-        Assert.assertEquals(nameTitle, "Full name");
-    }
-
-    @And("User can see Email title")
-    public void userCanSeeEmailTitle() {
-        String emailTitle = profileSettingsPage.email.getText();
-        System.out.println(emailTitle);
-        Assert.assertEquals(emailTitle, "Email");
-    }
-
-    @And("User can see Phone number title")
-    public void userCanSeePhoneNumberTitle() {
-        String phoneTitle = profileSettingsPage.phoneNumber.getText();
-        System.out.println(phoneTitle);
-        Assert.assertEquals(phoneTitle, "Phone number");
-    }
 
     @When("User navigates to Full Name inputbox")
     public void user_navigates_to_full_name_inputbox() {
@@ -59,7 +39,7 @@ public class profileSettings_StepDef {
     }
 
     @And("Enters new {string} and {string}")
-    public void entersNewAnd(String arg0, String arg1) {
+    public void entersNewAnd(String username, String arg1) {
         BrowserUtils.waitForPageToLoad(60);
         Faker faker = new Faker();
         profileSettingsPage.fullNameInputBox.sendKeys(faker.name().fullName());
@@ -84,12 +64,14 @@ public class profileSettings_StepDef {
 
     @When("User checks time under Locale dropdown")
     public void userChecksTimeUnderLocaleDropdown() {
+        BrowserUtils.waitForPageToLoad(60);
         profileSettingsPage.localDate.isDisplayed();
         profileSettingsPage.localTime.isDisplayed();
     }
+
     @Then("current local time is displayed correctly")
     public void currentLocalTimeIsDisplayedCorrectly() {
-        BrowserUtils.waitForPageToLoad(300);
+        BrowserUtils.waitForPageToLoad(60);
         String displayedTime = profileSettingsPage.localTime.getText();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.US);
         LocalTime time = LocalTime.now();
@@ -97,8 +79,32 @@ public class profileSettings_StepDef {
         System.out.println(displayedTime);
         System.out.println(current);
         Assert.assertEquals(displayedTime, current);
-
     }
+    @When("User is on the profile settings page")
+    public void userIsOnTheProfileSettingsPage() {
+        BrowserUtils.waitForPageToLoad(60);
+    }
+    @Then("User can see following titles:")
+    public void user_can_see_following_titles(io.cucumber.datatable.DataTable dataTable) {
+        List<String> expectedList = dataTable.asList(String.class);
+        List<String> listTitle = BrowserUtils.getElementsText(profileSettingsPage.title);
+        System.out.println(expectedList);
+        System.out.println(listTitle);
 
+        String namePara = expectedList.get(0);
+        String nameTitle = listTitle.get(3);
+        System.out.println(namePara + " / " + nameTitle);
+        Assert.assertEquals(nameTitle, namePara);
+
+        String emailPara = expectedList.get(1);
+        String emailTitle = listTitle.get(4);
+        System.out.println(emailPara + " / " + emailTitle);
+        Assert.assertEquals(emailTitle, emailPara);
+
+        String phonePara = expectedList.get(2);
+        String phoneTitle = listTitle.get(5);
+        System.out.println(phonePara + " / " + phoneTitle);
+        Assert.assertEquals(phoneTitle, phonePara);
+    }
 
 }

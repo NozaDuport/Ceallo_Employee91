@@ -28,5 +28,8 @@ public class ProfileSettingsPage {
     @FindBy(id = "localeexample-time")
     public WebElement localTime;
 
+    @FindBy(xpath = "//label")
+    public List<WebElement> title;
+
 
 }
