@@ -54,6 +54,7 @@ public class profileSettings_StepDef {
 
     @When("User navigates to Full Name inputbox")
     public void user_navigates_to_full_name_inputbox() {
+        BrowserUtils.waitForPageToLoad(60);
         profileSettingsPage.fullNameInputBox.clear();
     }
 
@@ -88,7 +89,7 @@ public class profileSettings_StepDef {
     }
     @Then("current local time is displayed correctly")
     public void currentLocalTimeIsDisplayedCorrectly() {
-        BrowserUtils.waitForPageToLoad(60);
+        BrowserUtils.waitForPageToLoad(300);
         String displayedTime = profileSettingsPage.localTime.getText();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss", Locale.US);
         LocalTime time = LocalTime.now();

@@ -7,10 +7,13 @@ import org.junit.runner.RunWith;
     @RunWith(Cucumber.class)
     @CucumberOptions(
             plugin = {"html:target/cucumber-reports.html",
-                    "me.jvt.cucumber.report.PrettyReports:target/cucumber"},
+                    "me.jvt.cucumber.report.PrettyReports:target/cucumber",
+                    "json:target/cucumber.json"
+            },
             features = "src/test/resources/features",
             glue = "com/ceallo/step_definitions",
-            tags = "@CEA10-304"
+            dryRun = false,
+            tags = "@CEA10-301"
     )
     public class CukesRunner{
     }

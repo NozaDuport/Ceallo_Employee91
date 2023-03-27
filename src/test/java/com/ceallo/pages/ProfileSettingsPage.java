@@ -21,8 +21,6 @@ public class ProfileSettingsPage {
     public WebElement email;
     @FindBy(xpath = "//label[@for='phone']")
     public WebElement phoneNumber;
-    @FindBy()
-    public WebElement phoneNumberInputBox;
     @FindBy(className = "federation-menu")
     public List<WebElement> phoneForm;
     @FindBy(id = "localeexample-date")

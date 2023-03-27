@@ -1,4 +1,4 @@
-@profileSettings
+@CEA10-301
 Feature: As a user, I should be able to change profile info settings under the Profile module
 
   Background:
@@ -7,7 +7,6 @@ Feature: As a user, I should be able to change profile info settings under the P
     Then  Ceallo dashboard should be displayed
     And User clicks on "settings" link
     And User navigates to profile settings page
-
 
   @CEA10-292
     Scenario: Verify user can see following titles inside personal info under Profile Settings page;
